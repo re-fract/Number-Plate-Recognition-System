@@ -467,5 +467,12 @@ def health():
     })
 
 if __name__ == '__main__':
-    print("🚀 Starting Flask-SocketIO server...")
-    socketio.run(app, debug=True, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
+    port = int(os.environ.get('PORT', 5000))
+    print(f"🚀 Starting server on port {port}")
+    socketio.run(
+        app,
+        host='0.0.0.0',
+        port=port,
+        debug=False,  # Disable debug in production
+        allow_unsafe_werkzeug=True
+    )
