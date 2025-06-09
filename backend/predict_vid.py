@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 from utils import calculate_iou, preprocess_plate, ocr_plate
 import cv2
 import numpy as np
