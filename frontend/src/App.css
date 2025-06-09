@@ -1,0 +1,1092 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-app: #0a0a0a;
+  --bg-surface: #111111;
+  --bg-elevated: #181818;
+  --bg-input: #1a1a1a;
+  --bg-hover: #222222;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --text-tertiary: #525252;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --success: #22c55e;
+  --success-hover: #16a34a;
+  --error: #ef4444;
+  --error-hover: #dc2626;
+  --warning: #f59e0b;
+  --border: #262626;
+  --border-light: #333333;
+  --radius: 8px;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 4px 16px 0 rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 24px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Header with floating animation */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 32px 0;
+  animation: fadeInDown 1s ease-out, float 6s ease-in-out infinite;
+}
+
+.header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #ffffff, #a3a3a3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 3s ease-in-out infinite;
+}
+
+.header p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+/* Animated Mode Selector */
+.mode-selector {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 32px;
+  padding: 4px;
+  background: var(--bg-surface);
+  border-radius: calc(var(--radius) + 4px);
+  border: 1px solid var(--border);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  animation: slideInUp 0.6s ease-out 0.4s both;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.mode-selector:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.mode-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.mode-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.mode-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.mode-btn:hover::before {
+  left: 100%;
+}
+
+.mode-btn.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: var(--shadow-glow);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.mode-icon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.mode-btn:hover .mode-icon {
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* Animated Cards */
+.upload-section, .webcam-section {
+  background: var(--bg-surface);
+  border-radius: calc(var(--radius) * 2);
+  padding: 32px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  animation: slideInUp 0.6s ease-out 0.6s both;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-section::before, .webcam-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--success), var(--warning));
+  transform: translateX(-100%);
+  animation: progressSlide 3s ease-in-out infinite;
+}
+
+.upload-section:hover, .webcam-section:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-light);
+}
+
+.upload-section h2, .webcam-section h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  text-align: center;
+  animation: fadeIn 0.6s ease-out 0.8s both;
+}
+
+/* Interactive Drop Zone */
+.drop-zone {
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius);
+  padding: 48px 24px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  background: var(--bg-input);
+  overflow: hidden;
+}
+
+.drop-zone::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: all 0.6s ease;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.drop-zone:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.drop-zone:hover {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: var(--shadow-glow);
+}
+
+.drop-zone.drag-over {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+  border-style: solid;
+  animation: breathe 1s ease-in-out infinite;
+  box-shadow: var(--shadow-glow);
+}
+
+.drop-zone.has-file {
+  border-color: var(--success);
+  background: var(--bg-elevated);
+  animation: successPulse 0.6s ease-out;
+}
+
+.upload-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: var(--text-tertiary);
+  transition: all 0.4s ease;
+  z-index: 1;
+  position: relative;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.drop-zone:hover .upload-icon {
+  transform: scale(1.2) rotate(5deg);
+  color: var(--accent);
+}
+
+.drop-zone h3, .drop-zone p {
+  z-index: 1;
+  position: relative;
+}
+
+.drop-zone h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.drop-zone p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* Animated File Info */
+.file-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  animation: zoomIn 0.4s ease-out;
+}
+
+.file-icon {
+  font-size: 24px;
+  color: var(--success);
+  animation: rotateIn 0.5s ease-out;
+}
+
+.file-details {
+  animation: slideInRight 0.4s ease-out 0.1s both;
+}
+
+.file-details h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.file-details p {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.clear-btn {
+  background: var(--error);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInLeft 0.4s ease-out 0.2s both;
+}
+
+.clear-btn:hover {
+  background: var(--error-hover);
+  transform: scale(1.2) rotate(90deg);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Animated Buttons */
+.action-buttons {
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.upload-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.upload-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.upload-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-glow);
+}
+
+.upload-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.upload-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Clean Webcam Buttons - Matching Stop Button Design */
+.webcam-btn {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  min-width: 110px;
+  justify-content: center;
+  height: auto;
+}
+
+.webcam-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.webcam-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--success);
+  color: var(--success);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.webcam-btn:hover::before {
+  left: 100%;
+}
+
+.webcam-btn:active {
+  transform: translateY(0);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+/* Start Button - Green Theme */
+.start-btn {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  min-width: 110px;
+  justify-content: center;
+  height: auto;
+}
+
+.start-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.start-btn:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: var(--success);
+  color: var(--success);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.start-btn:hover::before {
+  left: 100%;
+}
+
+.start-btn:active {
+  transform: translateY(0);
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.start-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Stop Webcam Button - Red Theme */
+.stop-webcam-btn {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  min-width: 110px;
+  justify-content: center;
+  height: auto;
+}
+
+.stop-webcam-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.stop-webcam-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--error);
+  color: var(--error);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.stop-webcam-btn:hover::before {
+  left: 100%;
+}
+
+.stop-webcam-btn:active {
+  transform: translateY(0);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Stop Processing Button */
+.stop-btn {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  min-width: 110px;
+  justify-content: center;
+  height: auto;
+}
+
+.stop-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.stop-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--error);
+  color: var(--error);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.stop-btn:hover::before {
+  left: 100%;
+}
+
+.stop-btn:active {
+  transform: translateY(0);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Webcam Controls with Staggered Animation */
+.webcam-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  animation: slideInUp 0.6s ease-out 0.5s both;
+}
+
+.webcam-controls > * {
+  animation: fadeInUp 0.4s ease-out calc(var(--i, 0) * 0.1s) both;
+}
+
+.status-indicator {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.status-indicator.active {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--success);
+  border-color: var(--success);
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+}
+
+.status-indicator.inactive {
+  color: var(--text-tertiary);
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+/* Media Containers with Parallax Effect */
+.webcam-container, .image-container, .video-container {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  transition: all 0.4s ease;
+  animation: scaleIn 0.6s ease-out 0.4s both;
+}
+
+.webcam-container:hover, .image-container:hover, .video-container:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+.webcam-feed, .result-image, .result-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.webcam-feed:hover, .result-image:hover, .result-video:hover {
+  transform: scale(1.05);
+}
+
+.webcam-placeholder {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-input);
+  position: relative;
+  overflow: hidden;
+}
+
+.webcam-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  animation: scan 3s ease-in-out infinite;
+}
+
+.placeholder-content {
+  text-align: center;
+  z-index: 1;
+  animation: float 4s ease-in-out infinite;
+}
+
+.placeholder-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: var(--text-tertiary);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.placeholder-content h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.placeholder-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Animated Progress */
+.progress-section {
+  margin-top: 20px;
+  animation: slideInUp 0.4s ease-out;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 3px;
+  background: var(--bg-input);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+  transform: translateX(-100%);
+  animation: progressShimmer 2s ease-in-out infinite;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--success));
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  animation: progressGlow 2s ease-in-out infinite;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+  animation: numberTick 0.5s ease-out;
+}
+
+/* Live Processing with Matrix Effect */
+.live-processing-section {
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  animation: slideInUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.live-processing-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 98px,
+    rgba(59, 130, 246, 0.03) 100px
+  );
+  animation: matrix 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Enhanced Processing Header */
+.processing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  z-index: 1;
+  position: relative;
+}
+
+.processing-header h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.processing-header h3::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--error);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.live-frame-container {
+  text-align: center;
+  margin-bottom: 16px;
+  z-index: 1;
+  position: relative;
+}
+
+.live-frame {
+  max-width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  animation: frameUpdate 0.5s ease-out;
+  transition: all 0.3s ease;
+}
+
+.live-frame:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.video-info-display {
+  background: var(--bg-input);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  animation: slideInLeft 0.4s ease-out;
+  z-index: 1;
+  position: relative;
+}
+
+.video-info-display p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+  margin: 2px 0;
+  opacity: 0;
+  animation: typewriter 0.5s ease-out forwards;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+/* Results with Reveal Animation */
+.results-section {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  animation: slideInUp 0.6s ease-out;
+}
+
+.results-section h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  text-align: center;
+  color: var(--text-primary);
+  animation: fadeIn 0.6s ease-out 0.2s both;
+}
+
+.result-info, .webcam-info {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--success);
+  font-weight: 500;
+  animation: fadeInUp 0.4s ease-out 0.3s both;
+}
+
+/* Animated Errors */
+.error-message, .webcam-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  animation: errorSlide 0.5s ease-out, shake 0.5s ease-in-out 0.5s;
+}
+
+/* Enhanced Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spinGlow 1s linear infinite;
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes rotateIn {
+  from { opacity: 0; transform: rotate(-180deg) scale(0.5); }
+  to { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(34, 197, 94, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.6); }
+}
+
+@keyframes textShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes progressSlide {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes progressShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes progressGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+}
+
+@keyframes scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes matrix {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100px); }
+}
+
+@keyframes frameUpdate {
+  0% { opacity: 0.8; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes typewriter {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes numberTick {
+  0% { transform: translateY(-5px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
+  100% { transform: scale(1); }
+}
+
+@keyframes errorSlide {
+  from { opacity: 0; transform: translateX(-100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes spinGlow {
+  0% { transform: rotate(0deg); box-shadow: 0 0 5px currentColor; }
+  50% { box-shadow: 0 0 15px currentColor; }
+  100% { transform: rotate(360deg); box-shadow: 0 0 5px currentColor; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app { padding: 16px; }
+  .container { max-width: 100%; }
+  .header h1 { font-size: 24px; }
+  .mode-selector { flex-direction: column; width: 100%; }
+  .mode-btn { justify-content: center; }
+  .upload-section, .webcam-section { padding: 20px; }
+  .drop-zone { padding: 32px 16px; }
+  .webcam-controls { flex-direction: column; gap: 12px; }
+  .processing-header { flex-direction: column; gap: 8px; }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
