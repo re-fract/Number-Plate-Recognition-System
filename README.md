@@ -1,7 +1,7 @@
 # Number Plate Recognition System (ANPR)
 
 <p align="center">
-  <img src="https://github.com/Tkvmaster/ANPR-System/blob/main/utility_files/anpr_logo.jpg" alt="System Overview" />
+  <img src="https://github.com/Tkvmaster/ANPR-System/blob/main/utility_files/anpr_logo.jpg" alt="System Overview" width="251" height="100"/>
 </p>
 
 A comprehensive Automatic Number Plate Recognition (ANPR) system with real-time video processing, live webcam detection, and image analysis capabilities.
