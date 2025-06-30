@@ -1,6 +1,8 @@
-# License Plate Recognition System (ANPR)
+# Number Plate Recognition System (ANPR)
 
-![System Overview](https://github.com/Tkvmaster/ANPR-System/blob/main/utility_files/anpr_logo.jpg?raw=true)
+<p align="center">
+  <img src="https://github.com/Tkvmaster/ANPR-System/blob/main/utility_files/anpr_logo.jpg" alt="System Overview" />
+</p>
 
 A comprehensive Automatic Number Plate Recognition (ANPR) system with real-time video processing, live webcam detection, and image analysis capabilities.
 
