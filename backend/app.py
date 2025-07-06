@@ -14,7 +14,15 @@ import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "http://localhost:3000",      # Development
+            "https://*.vercel.app",       # Any Vercel domain
+            "https://*.render.com"        # Any Render domain
+        ]
+    }
+})
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 UPLOAD_FOLDER = 'uploads'
@@ -467,7 +475,7 @@ def health():
     })
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))
+    port = int(os.environ.get('PORT', 5000))
     print(f"🚀 Starting server on port {port}")
     socketio.run(
         app,

@@ -1,16 +1,21 @@
-import matplotlib
-matplotlib.use('Agg')
 from utils import calculate_iou, preprocess_plate, ocr_plate
 import cv2
 import numpy as np
 from ultralytics import YOLO
 import easyocr
+import torch
 from sort.sort import *
 
 class PlateDetector:
     def __init__(self, video_source=0):
+        # Automatically detect device
+        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        print(f"Using device: {self.device}")
+        
         self.model = YOLO('../runs/detect/train/weights/best.pt')
-        self.reader = easyocr.Reader(['en'], gpu=True)
+        # Use GPU for EasyOCR only if CUDA is available
+        gpu_enabled = torch.cuda.is_available()
+        self.reader = easyocr.Reader(['en'], gpu=gpu_enabled)
         self.tracker = Sort(max_age=15, min_hits=1)
         self.cap = cv2.VideoCapture(video_source)
         self.plate_records = {}
@@ -29,7 +34,7 @@ class PlateDetector:
         return frame
 
     def _detect_plates(self, frame):
-        results = self.model.predict(frame, device='cuda', conf=0.4)
+        results = self.model.predict(frame, device=self.device, conf=0.4)
         detections = []
         current_ocr = {}
 
