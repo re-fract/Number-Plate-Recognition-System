@@ -1,0 +1,30 @@
+# Core web framework
+Flask==3.1.1
+flask-cors==6.0.0
+Flask-SocketIO==5.5.1
+
+# Computer vision and ML
+ultralytics==8.3.111
+opencv-python==4.11.0.86
+easyocr==1.7.2
+numpy==2.0.2
+
+# Object tracking (SORT)
+filterpy==1.4.5
+scikit-image==0.24.0
+matplotlib==3.9.4
+
+# Data processing
+pandas==2.2.3
+
+# Image processing
+Pillow==11.2.1
+
+# PyTorch CPU version (no CUDA)
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Additional dependencies
+PyYAML>=5.3.1
+tqdm>=4.64.0
